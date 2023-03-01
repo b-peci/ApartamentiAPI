@@ -1,0 +1,13 @@
+Application/obj/
+Tests/obj
+Host/obj
+Domain/obj
+Infrastructure/obj
+Application/bin/
+Tests/bin/
+Host/bin/
+Domain/bin/
+Infrastructure/bin/
+Host/important.json
+Host/bin
+Application/DatabaseFileDirectory
