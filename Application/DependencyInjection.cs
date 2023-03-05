@@ -15,7 +15,6 @@ public static  class DependencyInjection
         var assembly = Assembly.GetExecutingAssembly();
         service.AddMediatR(assembly);
         service.AddValidatorsFromAssembly(assembly);
-        
     }
 
     public static void AddValidators(this IServiceCollection service)
