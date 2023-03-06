@@ -17,6 +17,8 @@ public static class DependencyInjection
         service.AddScoped<IImageRepository, ImageRepository>();
         service.AddScoped<IChatRepository, ChatRepository>();
         service.AddScoped<IReadPostRepository, ReadPostRepository>();
+        service.AddScoped<ICityRepository, CityRepository>();
+        service.AddScoped<ICountryRepository, CountryRepository>();
         #endregion
 
         service.AddScoped<IJWTToken, JWTToken>();

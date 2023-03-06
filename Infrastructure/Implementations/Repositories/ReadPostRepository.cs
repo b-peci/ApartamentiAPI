@@ -48,7 +48,8 @@ public class ReadPostRepository : IReadPostRepository
 
         if (!string.IsNullOrEmpty(city.Trim()))
         {
-            sqlBuilder.Where("city = @city", new { city });
+            string selectedCity = city.TrimEnd();
+            sqlBuilder.Where("city = @selectedCity", new { selectedCity });
         }
 
         if (status is not PropertyStatus.Default)
@@ -63,12 +64,12 @@ public class ReadPostRepository : IReadPostRepository
 
         if (minPrice is not 0)
         {
-            sqlBuilder.Where("price >= @minPrice", new { minPrice });
+            sqlBuilder.Where("price >= @minPrice::money", new { minPrice });
         }
 
         if (maxPrice is not 0)
         {
-            sqlBuilder.Where("price <= @maxPrice", new { maxPrice });
+            sqlBuilder.Where("price <= @maxPrice::money", new { maxPrice });
         }
 
         if (noRooms is not 0)

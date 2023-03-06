@@ -73,6 +73,14 @@ public static class API
 
 
         #endregion
+
+        #region City Endpoints
+        app.MapGet("/city/getCities/{country}", CityEndpoints.GetCities);
+        #endregion
+        
+        #region Country Endpoints
+        app.MapGet("/country/getCountries", CountryEndpoints.GetCountries);
+        #endregion
     } 
     
     public static void AddAuthServices(this IServiceCollection service, IConfiguration Configuration)
