@@ -16,7 +16,7 @@ public static class UserEndPoint
         try
         {
             bool isCorrect = await mediator.Send(command);
-            if (!isCorrect) return Results.Ok("Credentials are not correct");
+            if (!isCorrect) return Results.Unauthorized();
             string tokenGenerator = await GenerateToken(command.Email, fullName: string.Empty, mediator);
             return Results.Ok(tokenGenerator);
         }
