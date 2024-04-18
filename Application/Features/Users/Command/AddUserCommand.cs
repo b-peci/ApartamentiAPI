@@ -48,8 +48,8 @@ public record AddUserCommandHandler : IRequestHandler<AddUserCommand, string>
             var user = new User(request.Email.ToLower(), password, salt, request.FirstName, request.LastName, request.DateOfBirth, request.RoleId, request.IsFromOAUTH);
             await _repository.AddUser(user);
             Guid userId = await _repository.GetUserIdFromEmail(request.Email);
-            string emailVerificationResponse = Email.SentEmail(emailTo: request.Email, emailFrom: _conf["EmailData:Email"], password: _conf["EmailData:Password"], userId);
-            return emailVerificationResponse;    
+            //string emailVerificationResponse = Email.SentEmail(emailTo: request.Email, emailFrom: _conf["EmailData:Email"], password: _conf["EmailData:Password"], userId);
+            return string.Empty;
         }
         catch (Exception e)
         {
