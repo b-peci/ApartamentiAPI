@@ -25,9 +25,20 @@ public class CheckUserCredentialCommandHandler : IRequestHandler<CheckUserCreden
     public async Task<bool> Handle(CheckUserCredentialCommand request, CancellationToken cancellationToken)
     {
         byte[] userSalt = await _repository.GetSaltForUser(request.Email);
+        if (userSalt == null)
+        {
+            await Task.Delay(3_000, cancellationToken);
+            return false;
+        }
         string hashedPassword;
         (hashedPassword, userSalt) = _passwordHelper.HashPassword(request.Password, userSalt);
         bool isCorrect = await _repository.CheckCredentials(request.Email.ToLower(), hashedPassword);
+        
+        if (!isCorrect)
+        {
+            await Task.Delay(3_000, cancellationToken);
+        }
+        
         return  isCorrect;
     }
 } 
