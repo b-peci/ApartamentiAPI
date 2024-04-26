@@ -13,7 +13,8 @@ public static class API
     {
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseHttpsRedirection();
+        
+        //app.UseHttpsRedirection();
         app.UseCors("CorsPolicy");
     }
     

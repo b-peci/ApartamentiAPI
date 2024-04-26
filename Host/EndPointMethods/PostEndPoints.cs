@@ -129,6 +129,7 @@ public class PostEndPoints
     }
     
     // TODO make so only the one who created can access this endpoint
+    // IDEA: Just add user id here, and check whether there is any post with that user id and postid
     public static async Task<IResult> UpdatePost(IMediator mediator, UpdatePostDataCommand command)
     {
         try

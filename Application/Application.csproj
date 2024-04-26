@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
       <UserSecretsId>f40ada6b-bb82-4a39-9bc5-55cf30afd0ec</UserSecretsId>
@@ -32,7 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DatabaseFileDirectory\Images\Posts" />
+      <Folder Include="DatabaseFileDirectory\Images\Posts\" />
     </ItemGroup>
 
 </Project>

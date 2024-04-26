@@ -15,6 +15,7 @@ public record GetPostToBeEditedByIdQueryHandler(IPostRepository _repository) : I
     {
         try
         {
+            // IDEA: Just add user id here, and check whether there is any post with that user id and postid
             EditPost postToBeEdited = await _repository.GetPostToBeEdited(request.PostId);
             
             return new GlobalResponseDto<EditPost>("Fetched data", isSuccess: true, postToBeEdited);
