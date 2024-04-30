@@ -42,7 +42,7 @@ public class PostRepository : IPostRepository
         using IDbConnection connection = new NpgsqlConnection(_configuration["ConnectionStrings:Default"]);
         string procedure =
             "CALL up_create_post(@_userid, @_title , @_description, @_status , " +
-            "@_norooms, @_space, @_price, @_type, @_isforselling, @_isforrenting, @_images)";
+            "@_norooms, @_space, @_price, @_type, @_isforselling, @_isforrenting, @_images, @_thumbnail)";
         var p = new DynamicParameters();
         p.Add("@_userid", post.UserId, DbType.Guid);
         p.Add("@_title", post.Title);
@@ -55,6 +55,7 @@ public class PostRepository : IPostRepository
         p.Add("@_isforselling", post.IsForSelling);
         p.Add("@_isforrenting", post.IsForRenting);
         p.Add("@_images", imagesPath);
+        p.Add("@_thumbnail", post.Thumbnail);
         await connection.ExecuteAsync(procedure, p);
     }
 

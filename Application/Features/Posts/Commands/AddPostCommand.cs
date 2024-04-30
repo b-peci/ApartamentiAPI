@@ -1,10 +1,12 @@
 using Application.Features.Posts.Helper_Methods;
 using Application.GlobalDtos;
+using Application.Interfaces.Helpers;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using SkiaSharp;
 
 namespace Application.Features.Posts.Commands;
 
@@ -23,20 +25,18 @@ public class AddPostCommand : IRequest<IResult>
     public FileDto[] Base64EncodedImages { get; set; }
 }
 
-public class AddPostCommandHandler : IRequestHandler<AddPostCommand, IResult>
+public class AddPostCommandHandler(IPostRepository repository, IMediator mediator)
+    : IRequestHandler<AddPostCommand, IResult>
 {
-    private readonly IPostRepository _repository;
-
-    public AddPostCommandHandler(IPostRepository repository)
-    {
-        _repository = repository;
-    }
-
     public async Task<IResult> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
         try
         {
-            string[] filePaths = FileHelper.SaveImagesInFileAndGetTheirPaths(request.Base64EncodedImages, "Posts");
+            string databaseFileDirectoryPath = GlobalFunctions.GetDatabaseDirectoryPath("Posts");
+            string thumbnailPath = $"{databaseFileDirectoryPath}/thumbnail_{Guid.NewGuid().ToString()}.{request.Base64EncodedImages.First().Extension}";
+            string[] filePaths = await mediator.Send(new SavePostImagesCommand(request.Base64EncodedImages, thumbnailPath), cancellationToken);
+            if (filePaths.Length == 0) return Results.Problem("Could not create post");
+            
             var post = new Post
             {
                 Description = request.Description,
@@ -48,15 +48,16 @@ public class AddPostCommandHandler : IRequestHandler<AddPostCommand, IResult>
                 Space = request.Space,
                 Status = PropertyStatus.Active,
                 PropertyType = request.Type,
-                UserId = request.UserId
+                UserId = request.UserId,
+                Thumbnail = thumbnailPath
             };
-            await _repository.AddPost(post, filePaths);
+            await repository.AddPost(post, filePaths);
             return Results.Ok();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return Results.Problem(e.Message);
+            return Results.Problem("Could not create post");
         }
     }
 

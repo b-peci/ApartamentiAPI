@@ -8,7 +8,7 @@ namespace Host.EndPointMethods;
 
 public class PostEndPoints
 {
-    public static async Task<IResult> GetPostsThumbnail(IMediator mediator,int pageNumber)
+    public static async Task<IResult> GetPostsThumbnail(IMediator mediator, int pageNumber)
     {
         try
         {

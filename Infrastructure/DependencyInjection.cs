@@ -1,6 +1,8 @@
 using Application.Interfaces;
+using Application.Interfaces.Helpers;
 using Application.Interfaces.Repositories;
 using Infrastructure.Implementations;
+using Infrastructure.Implementations.Helpers;
 using Infrastructure.Implementations.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,5 +25,6 @@ public static class DependencyInjection
 
         service.AddScoped<IJWTToken, JWTToken>();
         service.AddScoped<IPassword, Password>();
+        service.AddScoped<IImageHelper, ImageHelper>();
     }
 }

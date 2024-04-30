@@ -5,17 +5,17 @@ public class PostThumbnailData
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
-    private string _mainImagePath;
+    private string _thumbnail;
 
-    public string MainImagePath
+    public string Thumbnail
     {
         get
         {
-            return _mainImagePath;
+            return _thumbnail;
         }
         set
         {
-            _mainImagePath = value;
+            _thumbnail = value;
             Base64MainImage = Convert.ToBase64String(File.ReadAllBytes(value));
             ImageExtension = value.Split('.')[1];
         }

@@ -40,7 +40,7 @@ public static class API
         #region Posts Endpoint
 
         #region GET
-        app.MapGet("/Posts/GetPostsThumbnail/{pageNumber}", PostEndPoints.GetPostsThumbnail);
+        app.MapGet("/Posts/GetPostsThumbnail", PostEndPoints.GetPostsThumbnail);
         app.MapGet("/Posts/GetFilteredPosts", PostEndPoints.GetFilteredPosts);
         app.MapGet("/Posts/GetUserPostCount", PostEndPoints.GetUserPostCount);
         app.MapGet("/Posts/GetPostTimeInteracted", PostEndPoints.GetPostsInteractedPosts);

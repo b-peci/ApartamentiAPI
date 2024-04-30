@@ -17,5 +17,7 @@ public class Post : BaseEntity
     public PropertyStatus Status { get; set; }
 
     public Guid UserId { get; set; }
+
+    public string Thumbnail { get; set; }
     
 }
